@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusLA - Tu Eco sistema</title>
+    <title>CampusLA - Tu Ecosistema</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0d0d0d; color: #e1e1e1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
@@ -13,13 +13,14 @@
         .form-group { margin-bottom: 15px; }
         label { font-size: 0.85rem; color: #aaa; display: block; margin-bottom: 6px; }
         input { width: 100%; padding: 12px; background: #222; border: 1px solid #383838; color: #fff; border-radius: 6px; font-size: 0.95rem; }
+        input:focus { outline: none; border-color: #ff4d4d; }
         button { width: 100%; padding: 12px; background: #ff4d4d; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         button:hover { background: #e03e3e; }
         .switch-text { text-align: center; font-size: 0.85rem; color: #888; margin-top: 20px; }
         .switch-text a { color: #ff4d4d; text-decoration: none; font-weight: bold; cursor: pointer; }
         .switch-text a:hover { text-decoration: underline; }
         
-        /* Vistas */
+        /* Control de vistas */
         #register-view, #login-view, #dashboard-view { display: none; }
         
         .card { background: #1c1c1c; border: 1px solid #2e2e2e; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
@@ -33,23 +34,22 @@
 
 <div class="container">
     
-    <!-- VISTA 1: REGISTRO (Solo para nuevos) -->
+    <!-- VISTA 1: REGISTRO -->
     <div id="register-view">
         <h2>Crear Cuenta en CampusLA</h2>
         <p class="subtitle">Regístrate por primera vez para acceder a tu ecosistema.</p>
-        <form id="form-register" action="https://formsubmit.co/eatramites1@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Nuevo Estudiante Registrado en CampusLA">
+        <form id="form-register">
             <div class="form-group">
                 <label>Nombre completo</label>
-                <input type="text" name="nombre" id="reg-nombre" required>
+                <input type="text" id="reg-nombre" required>
             </div>
             <div class="form-group">
                 <label>Correo electrónico</label>
-                <input type="email" name="correo" id="reg-correo" required>
+                <input type="email" id="reg-correo" required>
             </div>
             <div class="form-group">
                 <label>Institución / Universidad</label>
-                <input type="text" name="institucion" id="reg-inst" required>
+                <input type="text" id="reg-inst" required>
             </div>
             <button type="submit">Registrarme y Entrar</button>
         </form>
@@ -58,11 +58,11 @@
         </div>
     </div>
 
-    <!-- VISTA 2: LOGIN (Para los que ya se registraron y cerraron sesión) -->
+    <!-- VISTA 2: LOGIN -->
     <div id="login-view">
         <h2>Iniciar Sesión</h2>
         <p class="subtitle">Ingresa con tu correo registrado para continuar.</p>
-        <form id="form-login" onsubmit="handleLogin(event)">
+        <form id="form-login">
             <div class="form-group">
                 <label>Correo electrónico</label>
                 <input type="email" id="login-correo" required placeholder="tucorreo@dominio.com">
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <!-- VISTA 3: DASHBOARD DEL ESTUDIANTE -->
+    <!-- VISTA 3: DASHBOARD -->
     <div id="dashboard-view">
         <h2 id="user-greeting" style="text-align: left; margin-bottom: 5px;">Hola</h2>
         <p class="subtitle" id="user-meta" style="text-align: left; margin-bottom: 20px;">Estudiante Activo</p>
@@ -97,19 +97,15 @@
     const loginView = document.getElementById('login-view');
     const dashboardView = document.getElementById('dashboard-view');
     
-    // Al cargar la página evaluamos el estado
     window.onload = function() {
         const savedUser = localStorage.getItem('cla_user');
         if (savedUser) {
-            // Si hay sesión activa, directo al dashboard
             mostrarDashboard(JSON.parse(savedUser));
         } else {
-            // Si no hay sesión, por defecto mostramos el LOGIN (porque ya se supone que el usuario conoce la plataforma o ya se ha registrado antes)
-            loginView.style.display = 'block';
+            loginView.style.display = 'block'; // Arranca en login por defecto si ya conoce la plataforma
         }
     };
 
-    // Control de pestañas visuales (Login vs Registro)
     function cambiarVista(vista) {
         if(vista === 'login') {
             registerView.style.display = 'none';
@@ -120,46 +116,59 @@
         }
     }
 
-    // Al registrarse por primera vez
+    // Registro con envío de correo silencioso a FormSubmit y apertura de dashboard fluida
     document.getElementById('form-register').addEventListener('submit', function(e) {
+        e.preventDefault();
         const nombre = document.getElementById('reg-nombre').value;
         const correo = document.getElementById('reg-correo').value;
         const institucion = document.getElementById('reg-inst').value;
 
         const userData = { nombre, correo, institucion };
         localStorage.setItem('cla_user', JSON.stringify(userData));
+
+        // Envía la alerta a tu correo (eatramites1@gmail.com) por detrás sin romper la página
+        fetch("https://formsubmit.co/ajax/eatramites1@gmail.com", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                _subject: "Nuevo Estudiante Registrado en CampusLA",
+                nombre: nombre,
+                correo: correo,
+                institucion: institucion
+            })
+        })
+        .catch(error => console.log('Error enviando aviso:', error));
+
+        mostrarDashboard(userData);
     });
 
-    // Al iniciar sesión desde el Login
-    function handleLogin(e) {
+    // Login rápido
+    document.getElementById('form-login').addEventListener('submit', function(e) {
         e.preventDefault();
         const correoIngresado = document.getElementById('login-correo').value;
-        
-        // Verificamos si existe un registro previo guardado con ese correo
         const savedUser = JSON.parse(localStorage.getItem('cla_user'));
         
         if (savedUser && savedUser.correo === correoIngresado) {
             mostrarDashboard(savedUser);
         } else {
-            // Si no coincide o no existe, simulamos acceso guardando los datos básicos para que no se trabe
             const basicUser = { nombre: 'Estudiante', correo: correoIngresado, institucion: 'CampusLA' };
             localStorage.setItem('cla_user', JSON.stringify(basicUser));
             mostrarDashboard(basicUser);
         }
-    }
+    });
 
     function mostrarDashboard(user) {
         registerView.style.display = 'none';
         loginView.style.display = 'none';
         dashboardView.style.display = 'block';
-        
         document.getElementById('user-greeting').innerText = `¡Qué tal, ${user.nombre}!`;
         document.getElementById('user-meta').innerText = `Institución: ${user.institucion || 'CampusLA'}`;
     }
 
     function cerrarSesion() {
-        // Borramos la sesión activa pero mantenemos el almacenamiento si queremos, o limpiamos todo.
-        // Al cerrar sesión, lo mandamos al LOGIN (no al registro).
         localStorage.removeItem('cla_user');
         dashboardView.style.display = 'none';
         loginView.style.display = 'block';
