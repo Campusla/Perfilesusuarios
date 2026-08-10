@@ -94,7 +94,7 @@
             userMeta.innerHTML = `Institución: ${institucion}`;
         }
 
-        window.onload = function() {
+        window.onload = function() { 
             if(localStorage.getItem('cla_nombre')) {
                 mostrarDashboard(localStorage.getItem('cla_nombre'), localStorage.getItem('cla_institucion'));
             }
