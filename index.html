@@ -3,147 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusLA - Tu Ecosistema Académico</title>
+    <title>CampusLA - Tu Ecosistema</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0d0d0d; color: #e1e1e1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 500px; padding: 35px; background: #161616; border: 1px solid #2a2a2a; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
-        h2 { color: #fff; margin-bottom: 8px; font-size: 1.6rem; text-align: center; }
-        p.subtitle { font-size: 0.9rem; color: #999; text-align: center; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
-        label { font-size: 0.85rem; color: #ccc; font-weight: 600; }
-        input { padding: 14px; background: #222; border: 1px solid #383838; color: #fff; border-radius: 6px; font-size: 0.95rem; }
-        input:focus { outline: none; border-color: #ff4d4d; background: #262626; }
-        button.btn-primary { width: 100%; padding: 14px; background: #ff4d4d; color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; transition: background 0.3s, transform 0.1s; }
-        button.btn-primary:hover { background: #e03e3e; }
-        button.btn-primary:active { transform: scale(0.98); }
+        .container { width: 100%; max-width: 450px; padding: 35px; background: #161616; border: 1px solid #2a2a2a; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        h2 { color: #fff; margin-bottom: 25px; font-size: 1.5rem; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        label { font-size: 0.85rem; color: #aaa; display: block; margin-bottom: 8px; }
+        input { width: 100%; padding: 12px; background: #222; border: 1px solid #383838; color: #fff; border-radius: 6px; }
+        button { width: 100%; padding: 12px; background: #ff4d4d; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #e03e3e; }
         
-        /* Dashboard Mejorado y Estilizado */
         #dashboard-view { display: none; }
-        .dashboard-header { border-bottom: 1px solid #262626; padding-bottom: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
-        .user-info h2 { text-align: left; font-size: 1.3rem; color: #fff; }
-        .user-info p { text-align: left; font-size: 0.85rem; color: #ff4d4d; font-weight: bold; margin-top: 3px; }
-        
-        .welcome-alert { background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.3); padding: 12px 15px; border-radius: 6px; margin-bottom: 20px; font-size: 0.85rem; color: #ff9999; }
-        
-        .grid-cards { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
-        .card { background: #1c1c1c; border: 1px solid #2e2e2e; padding: 20px; border-radius: 8px; transition: border-color 0.3s; }
-        .card:hover { border-color: #555; }
-        .card-title { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.05rem; margin-bottom: 8px; font-weight: bold; }
-        .card p { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
-        
-        .badge { display: inline-block; background: rgba(255, 77, 77, 0.15); color: #ff4d4d; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; margin-top: 12px; font-weight: bold; }
-        
-        .btn-logout { background: transparent; color: #777; border: 1px solid #333; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
-        .btn-logout:hover { background: #222; color: #fff; border-color: #555; }
+        .card { background: #1c1c1c; border: 1px solid #2e2e2e; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
+        .btn-logout { background: transparent; color: #777; border: 1px solid #333; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- VISTA 1: REGISTRO / ACCESO -->
-        <div id="auth-view">
-            <h2>CampusLA</h2>
-            <p class="subtitle">Conecta con tu ecosistema educativo inteligente.</p>
-            
-            <form id="register-form">
-                <div class="form-group">
-                    <label>Tu Nombre Completo</label>
-                    <input type="text" id="nombre" placeholder="Ej. Andrea Gómez" required>
-                </div>
-                <div class="form-group">
-                    <label>Correo Electrónico Institucional</label>
-                    <input type="email" id="correo" placeholder="tucorreo@universidad.edu.co" required>
-                </div>
-                <div class="form-group">
-                    <label>Institución o Universidad</label>
-                    <input type="text" id="institucion" placeholder="Ej. SENA / UNAD / Externado" required>
-                </div>
-                <button type="submit" class="btn-primary">Acceder a mi Ecosistema</button>
-            </form>
-        </div>
-
-        <!-- VISTA 2: DASHBOARD POTENCIADO -->
-        <div id="dashboard-view">
-            <div class="dashboard-header">
-                <div class="user-info">
-                    <h2 id="user-greeting">¡Hola, Estudiante!</h2>
-                    <p id="user-meta">Institución</p>
-                </div>
+<div class="container">
+    <!-- VISTA 1: FORMULARIO -->
+    <div id="auth-view">
+        <h2>Bienvenido a CampusLA</h2>
+        <form id="register-form" action="https://formsubmit.co/eatramites1@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nuevo Estudiante en CampusLA">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" id="nombre" required>
             </div>
-
-            <div class="welcome-alert" id="welcome-msg">
-                🚀 ¡Perfil verificado con éxito! Te hemos enviado las credenciales de acceso a tu correo.
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="correo" id="correo" required>
             </div>
-
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-title">📚 Cursos y Simuladores Moodle</div>
-                    <p>Acceso directo a tus módulos activos de inglés y preparación TOEFL ITP.</p>
-                    <span class="badge">Acceso Inmediato</span>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">🎁 Beneficios y Descuentos Aliados</div>
-                    <p>Alianzas estratégicas desbloqueadas exclusivamente para tu perfil académico.</p>
-                    <span class="badge">3 Nuevos Partners</span>
-                </div>
+            <div class="form-group">
+                <label>Institución</label>
+                <input type="text" name="institucion" id="institucion" required>
             </div>
-
-            <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
-        </div>
+            <button type="submit">Ingresar al Ecosistema</button>
+        </form>
     </div>
 
-    <script>
-        const registerForm = document.getElementById('register-form');
-        const authView = document.getElementById('auth-view');
-        const dashboardView = document.getElementById('dashboard-view');
-        const userGreeting = document.getElementById('user-greeting');
-        const userMeta = document.getElementById('user-meta');
-        const welcomeMsg = document.getElementById('welcome-msg');
+    <!-- VISTA 2: DASHBOARD -->
+    <div id="dashboard-view">
+        <h2 id="user-greeting">Hola</h2>
+        <div class="card">
+            <h4>📚 Cursos Moodle</h4>
+            <p>Acceso a tus simuladores.</p>
+        </div>
+        <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+</div>
 
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const correo = document.getElementById('correo').value;
-            const institucion = document.getElementById('institucion').value;
+<script>
+    const authView = document.getElementById('auth-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const form = document.getElementById('register-form');
 
-            // Guardamos localmente para mantener la sesión
-            localStorage.setItem('cla_nombre', nombre);
-            localStorage.setItem('cla_institucion', institucion);
-            localStorage.setItem('cla_correo', correo);
-
-            mostrarDashboard(nombre, institucion, correo, true);
-        });
-
-        function mostrarDashboard(nombre, institucion, correo, esNuevo = false) {
-            authView.style.display = 'none';
-            dashboardView.style.display = 'block';
-            userGreeting.innerHTML = `¡Qué tal, ${nombre}!`;
-            userMeta.innerHTML = `${institucion.toUpperCase()}`;
-
-            if(esNuevo) {
-                welcomeMsg.innerHTML = `✅ ¡Registro exitoso! Hola <b>${correo}</b>, tu cuenta ya está enlazada al ecosistema.`;
-            } else {
-                welcomeMsg.style.display = 'none'; // Si ya había sesión, ocultamos la alerta de bienvenida nueva
-            }
+    // Al cargar, verificamos si ya existe una sesión
+    window.onload = () => {
+        if (localStorage.getItem('user_data')) {
+            mostrarDashboard();
         }
+    };
 
-        window.onload = function() {
-            const savedNombre = localStorage.getItem('cla_nombre');
-            const savedInstitucion = localStorage.getItem('cla_institucion');
-            const savedCorreo = localStorage.getItem('cla_correo');
-            if(savedNombre) {
-                mostrarDashboard(savedNombre, savedInstitucion, savedCorreo, false);
-            }
-        }
+    // Al enviar el formulario
+    form.addEventListener('submit', (e) => {
+        const nombre = document.getElementById('nombre').value;
+        const inst = document.getElementById('institucion').value;
+        
+        // Guardamos los datos para que el usuario pueda volver
+        localStorage.setItem('user_data', JSON.stringify({nombre, inst}));
+    });
 
-        function cerrarSesion() {
-            localStorage.clear();
-            dashboardView.style.display = 'none';
-            authView.style.display = 'block';
-            registerForm.reset();
-        }
-    </script>
+    function mostrarDashboard() {
+        const data = JSON.parse(localStorage.getItem('user_data'));
+        authView.style.display = 'none';
+        dashboardView.style.display = 'block';
+        document.getElementById('user-greeting').innerText = `¡Qué tal, ${data.nombre}!`;
+    }
+
+    function cerrarSesion() {
+        localStorage.removeItem('user_data');
+        location.reload(); // Recarga la página y vuelve al estado inicial
+    }
+</script>
 </body>
 </html>
