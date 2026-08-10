@@ -3,176 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusLA - Tu Ecosistema</title>
+    <title>CampusLA - Tu Ecosistema Académico</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0d0d0d; color: #e1e1e1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 450px; padding: 35px; background: #161616; border: 1px solid #2a2a2a; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
-        h2 { color: #fff; margin-bottom: 8px; font-size: 1.5rem; text-align: center; }
-        p.subtitle { font-size: 0.85rem; color: #888; text-align: center; margin-bottom: 25px; }
-        .form-group { margin-bottom: 15px; }
-        label { font-size: 0.85rem; color: #aaa; display: block; margin-bottom: 6px; }
-        input { width: 100%; padding: 12px; background: #222; border: 1px solid #383838; color: #fff; border-radius: 6px; font-size: 0.95rem; }
-        input:focus { outline: none; border-color: #ff4d4d; }
-        button { width: 100%; padding: 12px; background: #ff4d4d; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #e03e3e; }
-        .switch-text { text-align: center; font-size: 0.85rem; color: #888; margin-top: 20px; }
-        .switch-text a { color: #ff4d4d; text-decoration: none; font-weight: bold; cursor: pointer; }
+        .container { width: 100%; max-width: 420px; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #333; }
+        
+        h3.title-brand { color: #003366; font-weight: 700; text-align: center; margin-bottom: 20px; font-size: 1.5rem; }
+        p.subtitle { font-size: 0.85rem; color: #666; text-align: center; margin-bottom: 20px; }
+        
+        .input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; background: #fff; color: #333;
+        }
+        input:focus { outline: none; border-color: #39ff14; }
+        
+        .terms-box { height: 90px; overflow-y: auto; border: 1px solid #eee; padding: 10px; background: #f9f9f9; border-radius: 6px; font-size: 0.75rem; color: #444; margin-bottom: 15px; }
+        .terms-box label { display: block; margin-bottom: 6px; cursor: pointer; }
+        
+        button.btn-main { background-color: #39ff14 !important; color: #000 !important; border: none; font-weight: bold; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1rem; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4); text-transform: uppercase; transition: transform 0.2s; }
+        button.btn-main:hover { background-color: #32e010 !important; }
+        
+        .switch-text { text-align: center; font-size: 0.85rem; color: #666; margin-top: 15px; }
+        .switch-text a { color: #0056b3; text-decoration: none; font-weight: bold; cursor: pointer; }
         .switch-text a:hover { text-decoration: underline; }
-        
-        /* Control de vistas */
-        #register-view, #login-view, #dashboard-view { display: none; }
-        
-        .card { background: #1c1c1c; border: 1px solid #2e2e2e; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
-        .card h4 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
-        .card p { font-size: 0.85rem; color: #aaa; }
-        .btn-logout { background: transparent; color: #777; border: 1px solid #333; margin-top: 15px; }
-        .btn-logout:hover { background: #222; color: #fff; }
+
+        /* Vistas Modulares */
+        #register-section, #login-section, #dashboard-section { display: none; }
+
+        /* Dashboard Styles */
+        .dashboard-header { border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .dashboard-header h2 { color: #003366; font-size: 1.3rem; }
+        .dashboard-header p { color: #666; font-size: 0.85rem; }
+        .card-moodle { background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .card-moodle h4 { color: #003366; font-size: 1rem; margin-bottom: 5px; }
+        .card-moodle p { color: #555; font-size: 0.85rem; }
+        .btn-logout { background: transparent; color: #666; border: 1px solid #ccc; width: 100%; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .btn-logout:hover { background: #eee; color: #000; }
     </style>
 </head>
 <body>
 
 <div class="container">
     
-    <!-- VISTA 1: REGISTRO -->
-    <div id="register-view">
-        <h2>Crear Cuenta en CampusLA</h2>
-        <p class="subtitle">Regístrate por primera vez para acceder a tu ecosistema.</p>
+    <!-- MÓDULO 1: REGISTRO (Estética oficial de CLA) -->
+    <div id="register-section">
+        <h3 class="title-brand">¡Regístrate Ahora!</h3>
         <form id="form-register">
-            <div class="form-group">
-                <label>Nombre completo</label>
-                <input type="text" id="reg-nombre" required>
+            <div class="input-group">
+                <input type="text" id="reg-nombre" placeholder="Nombre completo" required>
+                <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+                <input type="tel" id="reg-telefono" placeholder="Teléfono" required>
+                <input type="password" id="reg-clave" placeholder="Contraseña" required>
+                
+                <div class="terms-box">
+                    <label>
+                        <input type="checkbox" id="acepto_datos" required> Autorizo el tratamiento de datos según la Política de Privacidad de CampusLA.
+                    </label>
+                    <label>
+                        <input type="checkbox" id="acepto_terminos" required> Acepto los <a href="https://campusla.github.io/terminosycondiciones/" target="_blank">Términos y Condiciones</a>.
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Correo electrónico</label>
-                <input type="email" id="reg-correo" required>
-            </div>
-            <div class="form-group">
-                <label>Institución / Universidad</label>
-                <input type="text" id="reg-inst" required>
-            </div>
-            <button type="submit">Registrarme y Entrar</button>
+            <button type="submit" id="btn-reg" class="btn-main">Registrarse Ahora</button>
         </form>
         <div class="switch-text">
-            ¿Ya tienes una cuenta? <a onclick="cambiarVista('login')">Inicia sesión aquí</a>
+            ¿Ya tienes una cuenta? <a onclick="cambiarVista('login')">Inicia sesión</a>
         </div>
     </div>
 
-    <!-- VISTA 2: LOGIN -->
-    <div id="login-view">
-        <h2>Iniciar Sesión</h2>
-        <p class="subtitle">Ingresa con tu correo registrado para continuar.</p>
+    <!-- MÓDULO 2: INICIAR SESIÓN -->
+    <div id="login-section">
+        <h3 class="title-brand">Iniciar Sesión</h3>
+        <p class="subtitle">Accede a tu perfil y recursos académicos.</p>
         <form id="form-login">
-            <div class="form-group">
-                <label>Correo electrónico</label>
-                <input type="email" id="login-correo" required placeholder="tucorreo@dominio.com">
+            <div class="input-group">
+                <input type="email" id="login-email" placeholder="Correo electrónico registrado" required>
             </div>
-            <button type="submit">Entrar a mi Perfil</button>
+            <button type="submit" class="btn-main">Entrar a mi Perfil</button>
         </form>
         <div class="switch-text">
-            ¿Eres nuevo por acá? <a onclick="cambiarVista('register')">Crea tu cuenta gratis</a>
+            ¿Eres nuevo? <a onclick="cambiarVista('register')">Regístrate aquí</a>
         </div>
     </div>
 
-    <!-- VISTA 3: DASHBOARD -->
-    <div id="dashboard-view">
-        <h2 id="user-greeting" style="text-align: left; margin-bottom: 5px;">Hola</h2>
-        <p class="subtitle" id="user-meta" style="text-align: left; margin-bottom: 20px;">Estudiante Activo</p>
+    <!-- MÓDULO 3: DASHBOARD PERSONAL (Conexión Moodle) -->
+    <div id="dashboard-section">
+        <div class="dashboard-header">
+            <h2 id="user-greeting">¡Hola!</h2>
+            <p id="user-email-display">estudiante@campusla.edu.co</p>
+        </div>
         
-        <div class="card">
-            <h4>📚 Cursos y Simuladores Moodle</h4>
-            <p>Acceso directo a tus módulos de inglés y TOEFL ITP.</p>
+        <div class="card-moodle">
+            <h4>📚 Mis Cursos y Simuladores Moodle</h4>
+            <p>Acceso directo a tus módulos de inglés y certificación TOEFL ITP.</p>
         </div>
-        <div class="card">
+        <div class="card-moodle">
             <h4>🎁 Beneficios Aliados</h4>
-            <p>Descuentos exclusivos para tu perfil académico.</p>
+            <p>Descuentos y accesos exclusivos desbloqueados para ti.</p>
         </div>
+        
         <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
     </div>
 
 </div>
 
 <script>
-    const registerView = document.getElementById('register-view');
-    const loginView = document.getElementById('login-view');
-    const dashboardView = document.getElementById('dashboard-view');
-    
+    const registerSec = document.getElementById('register-section');
+    const loginSec = document.getElementById('login-section');
+    const dashboardSec = document.getElementById('dashboard-section');
+
+    // Al cargar la página evaluamos si hay sesión activa
     window.onload = function() {
-        const savedUser = localStorage.getItem('cla_user');
-        if (savedUser) {
-            mostrarDashboard(JSON.parse(savedUser));
+        const user = localStorage.getItem('cla_active_user');
+        if (user) {
+            mostrarDashboard(JSON.parse(user));
         } else {
-            loginView.style.display = 'block'; // Arranca en login por defecto si ya conoce la plataforma
+            loginSec.style.display = 'block'; // Por defecto muestra login para usuarios recurrentes
         }
     };
 
     function cambiarVista(vista) {
-        if(vista === 'login') {
-            registerView.style.display = 'none';
-            loginView.style.display = 'block';
+        if(vista === 'register') {
+            loginSec.style.display = 'none';
+            registerSec.style.display = 'block';
         } else {
-            loginView.style.display = 'none';
-            registerView.style.display = 'block';
+            registerSec.style.display = 'none';
+            loginSec.style.display = 'block';
         }
     }
 
-    // Registro con envío de correo silencioso a FormSubmit y apertura de dashboard fluida
+    // Lógica modular de Registro
     document.getElementById('form-register').addEventListener('submit', function(e) {
         e.preventDefault();
+        const btn = document.getElementById('btn-reg');
+        btn.innerText = 'PROCESANDO...';
+        btn.disabled = true;
+
         const nombre = document.getElementById('reg-nombre').value;
-        const correo = document.getElementById('reg-correo').value;
-        const institucion = document.getElementById('reg-inst').value;
+        const email = document.getElementById('reg-email').value;
+        const telefono = document.getElementById('reg-telefono').value;
+        
+        const userData = { nombre, email, telefono };
+        localStorage.setItem('cla_active_user', JSON.stringify(userData));
 
-        const userData = { nombre, correo, institucion };
-        localStorage.setItem('cla_user', JSON.stringify(userData));
-
-        // Envía la alerta a tu correo (eatramites1@gmail.com) por detrás sin romper la página
+        // Notificación silenciosa vía FormSubmit (mientras montas el backend PHP en tu cPanel)
         fetch("https://formsubmit.co/ajax/eatramites1@gmail.com", {
             method: "POST",
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                _subject: "Nuevo Estudiante Registrado en CampusLA",
-                nombre: nombre,
-                correo: correo,
-                institucion: institucion
-            })
-        })
-        .catch(error => console.log('Error enviando aviso:', error));
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ _subject: "Nuevo Registro CLA", nombre, email, telefono })
+        }).catch(err => console.log(err));
 
+        setTimeout(() => {
+            mostrarDashboard(userData);
+            btn.innerText = 'Registrarse Ahora';
+            btn.disabled = false;
+        }, 800);
+    });
+
+    // Lógica modular de Login
+    document.getElementById('form-login').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const savedUser = JSON.parse(localStorage.getItem('cla_active_user'));
+        
+        const userData = (savedUser && savedUser.email === email) ? savedUser : { nombre: 'Estudiante', email: email };
+        localStorage.setItem('cla_active_user', JSON.stringify(userData));
+        
         mostrarDashboard(userData);
     });
 
-    // Login rápido
-    document.getElementById('form-login').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const correoIngresado = document.getElementById('login-correo').value;
-        const savedUser = JSON.parse(localStorage.getItem('cla_user'));
-        
-        if (savedUser && savedUser.correo === correoIngresado) {
-            mostrarDashboard(savedUser);
-        } else {
-            const basicUser = { nombre: 'Estudiante', correo: correoIngresado, institucion: 'CampusLA' };
-            localStorage.setItem('cla_user', JSON.stringify(basicUser));
-            mostrarDashboard(basicUser);
-        }
-    });
-
     function mostrarDashboard(user) {
-        registerView.style.display = 'none';
-        loginView.style.display = 'none';
-        dashboardView.style.display = 'block';
-        document.getElementById('user-greeting').innerText = `¡Qué tal, ${user.nombre}!`;
-        document.getElementById('user-meta').innerText = `Institución: ${user.institucion || 'CampusLA'}`;
+        registerSec.style.display = 'none';
+        loginSec.style.display = 'none';
+        dashboardSec.style.display = 'block';
+        document.getElementById('user-greeting').innerText = `¡Qué tal, ${user.nombre || 'Estudiante'}!`;
+        document.getElementById('user-email-display').innerText = user.email;
     }
 
     function cerrarSesion() {
-        localStorage.removeItem('cla_user');
-        dashboardView.style.display = 'none';
-        loginView.style.display = 'block';
-        document.getElementById('form-login').reset();
+        localStorage.removeItem('cla_active_user');
+        dashboardSec.style.display = 'none';
+        loginSec.style.display = 'block';
     }
 </script>
 </body>
