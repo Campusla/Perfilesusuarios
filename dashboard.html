@@ -3,127 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consola del Estudiante | CampusLA</title>
+    <title>Consola Personal del Estudiante | CampusLA</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f8fafc; --sidebar-bg: #ffffff; --card: #ffffff; --primary: #0084ff;
-            --text-main: #1e293b; --text-dim: #64748b; --border: #e2e8f0; --success: #059669;
+            --sidebar-width: 280px;
+            --bg-main: #f0f2f5;
+            --card-bg: #ffffff;
+            --primary: #003366;
+            --text-main: #1c1e21;
+            --text-dim: #606770;
+            --border: #ccd0d5;
+            --success: #10b981;
         }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        body { font-family: 'Plus Jakarta Sans', Helvetica, Arial, sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; display: flex; min-height: 100vh; }
         
-        /* Barra Lateral */
-        aside { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
-        .brand { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
-        .user-tag { font-size: 0.75rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; background: rgba(0, 132, 255, 0.08); padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        /* Sidebar */
+        .help-sidebar { width: var(--sidebar-width); background: #ffffff; border-right: 1px solid var(--border); position: fixed; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; box-sizing: border-box; z-index: 10; }
+        .sidebar-brand .brand-badge { background: #e7f3ff; color: #1877f2; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; display: inline-block; margin-bottom: 8px; }
+        .sidebar-brand h3 { font-size: 15px; color: var(--primary); margin: 0; font-weight: 700; }
         
-        .nav-menu { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .nav-item { padding: 12px 15px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-dim); cursor: pointer; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; }
-        .nav-item.active, .nav-item:hover { background: rgba(0, 132, 255, 0.1); color: var(--primary); }
-
-        /* Contenido Principal */
-        main { flex-grow: 1; padding: 40px; overflow-y: auto; box-sizing: border-box; }
-        h1 { font-size: 1.5rem; font-weight: 700; margin-top: 0; color: #0f172a; }
-        .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
-
-        .card-panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card-header { font-size: 0.9rem; font-weight: 700; color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; }
+        .help-nav-menu { display: flex; flex-direction: column; gap: 6px; margin-top: 20px; }
+        .nav-item { background: transparent; border: none; text-align: left; padding: 12px 14px; font-size: 13px; font-weight: 600; color: var(--text-dim); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .nav-item:hover, .nav-item.active { background: #e7f3ff; color: #1877f2; }
         
-        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
-        .info-label { color: var(--text-dim); font-weight: 500; }
-        .info-val { font-weight: 600; color: #0f172a; }
+        .sidebar-support-box { background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border); text-align: center; }
+        .sidebar-support-box p { font-size: 12px; color: var(--text-dim); margin: 0 0 10px 0; }
+        .btn-sidebar-alert { display: block; background: var(--primary); color: #fff; text-decoration: none; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: 700; }
 
-        .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.8rem; margin-top: 20px; transition: 0.2s; }
+        /* Contenido Central */
+        .help-content-body { margin-left: var(--sidebar-width); flex: 1; padding: 40px; box-sizing: border-box; max-width: 1000px; }
+        .help-main-header { margin-bottom: 25px; }
+        .help-main-header h1 { font-size: 22px; color: var(--primary); margin: 0 0 6px 0; font-weight: 700; }
+        .help-main-header p { color: var(--text-dim); font-size: 13.5px; margin: 0; }
+
+        .master-content-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        
+        .help-tab-pane { display: none; }
+        .help-tab-pane.active-pane { display: block; }
+
+        .sec-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 20px; }
+        .sec-number { background: var(--primary); color: #fff; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 12px; font-weight: 700; }
+        .sec-header h2 { font-size: 16px; margin: 0; color: #1c1e21; }
+
+        .profile-meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .profile-meta-table tr td { padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-size: 13.5px; }
+        .meta-label { font-weight: 700; color: var(--text-dim); width: 40%; }
+        .meta-value { color: #1c1e21; font-weight: 500; }
+
+        .btn-action-cla { background: #39ff14; color: #000; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(57,255,20,0.3); }
+        .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 25px; font-size: 12px; }
         .btn-logout:hover { background: #fecaca; }
 
-        .section-view { display: none; }
-        .section-view.active { display: block; }
-        
-        .btn-action { display: inline-block; background: var(--primary); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; margin-top: 15px; }
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .help-sidebar { position: relative; width: 100%; height: auto; }
+            .help-content-body { margin-left: 0; padding: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- BARRA LATERAL -->
-    <aside>
+    <!-- SIDEBAR DE LA CONSOLA -->
+    <aside class="help-sidebar">
         <div>
-            <div class="user-tag">Estudiante Pro</div>
-            <div class="brand" id="sidebarNombre">Cargando...</div>
+            <div class="sidebar-brand">
+                <span class="brand-badge">Estudiante Pro</span>
+                <h3 id="sidebar-user-name">Hollman Alvarez</h3>
+            </div>
+            
+            <nav class="help-nav-menu">
+                <button onclick="switchTab('datos-registro', this)" class="nav-item active">1. Mi Perfil & Datos</button>
+                <button onclick="switchTab('estado-academico', this)" class="nav-item">2. Cursos & Moodle LMS</button>
+                <button onclick="switchTab('soportes-pago', this)" class="nav-item">3. Compras & Soportes</button>
+                <button onclick="switchTab('seguridad-cred', this)" class="nav-item">4. Seguridad & Accesos</button>
+            </nav>
         </div>
-        <ul class="nav-menu">
-            <li class="nav-item active" onclick="cambiarVista('perfil', this)">👤 1. Mi Perfil & Datos</li>
-            <li class="nav-item" onclick="cambiarVista('cursos', this)">📚 2. Cursos & Moodle LMS</li>
-            <li class="nav-item" onclick="cambiarVista('soporte', this)">💳 3. Pagos & Soportes</li>
-        </ul>
-        <button onclick="localStorage.removeItem('campusla_student_session'); window.location.href='index.html';" class="btn-logout">Cerrar Sesión</button>
+
+        <div class="sidebar-support-box">
+            <p>¿Dudas con tu cuenta?</p>
+            <a href="https://www.campuslatinoamerica.edu.co" target="_blank" class="btn-sidebar-alert">Soporte CLA</a>
+        </div>
     </aside>
 
     <!-- CONTENIDO CENTRAL -->
-    <main>
-        <!-- VISTA 1: PERFIL -->
-        <div id="vista-perfil" class="section-view active">
+    <main class="help-content-body">
+        <div class="help-main-header">
             <h1>Consola Personal del Estudiante</h1>
-            <p class="subtitle">Bienvenido a tu centro de control en CampusLA. Administra tu formación y accesos.</p>
-            
-            <div class="card-panel">
-                <div class="card-header">01. Metadatos y Credenciales Oficiales</div>
-                <div class="info-row"><span class="info-label">Nombre Completo</span><span class="info-val" id="valNombre">Cargando...</span></div>
-                <div class="info-row"><span class="info-label">Cédula / Documento</span><span class="info-val" id="valCedula">Cargando...</span></div>
-                <div class="info-row"><span class="info-label">Correo Principal</span><span class="info-val" id="valCorreo">Cargando...</span></div>
-                <div class="info-row"><span class="info-label">Nivel de Inglés</span><span class="info-val" id="valNivel">Cargando...</span></div>
-                <div class="info-row"><span class="info-label">Estado de Cuenta</span><span class="info-val" style="color: var(--success);" id="valEstado">● Activo y Verificado</span></div>
-            </div>
+            <p>Bienvenido a tu centro de control en CampusLA. Administra tu formación y accesos.</p>
         </div>
 
-        <!-- VISTA 2: CURSOS Y MOODLE -->
-        <div id="vista-cursos" class="section-view">
-            <h1>Mis Cursos y Moodle LMS</h1>
-            <p class="subtitle">Accede directamente a tus simuladores de examen y contenidos oficiales.</p>
-            
-            <div class="card-panel">
-                <div class="card-header">Simulador Oficial TOEFL ITP + Moodle Core</div>
-                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Tienes habilitado el acceso completo a los módulos de práctica cronometrada y certificación internacional.</p>
-                <a href="https://www.campuslatinoamerica.edu.co/moodle/" target="_blank" class="btn-action">INGRESAR AL CAMPUS MOODLE</a>
-            </div>
-        </div>
+        <div class="master-content-card">
 
-        <!-- VISTA 3: SOPORTES -->
-        <div id="vista-soporte" class="section-view">
-            <h1>Estado Financiero y Soportes</h1>
-            <p class="subtitle">Validación de pagos y radicación institucional.</p>
-            
-            <div class="card-panel">
-                <div class="card-header">Soporte de Matrícula</div>
-                <div class="info-row"><span class="info-label">Soporte de Pago</span><span class="info-val" style="color: var(--success);">Subido y Conciliado</span></div>
-                <div class="info-row"><span class="info-label">Fecha de Radicación</span><span class="info-val" id="valFecha">Cargando...</span></div>
+            <!-- 1. MI PERFIL Y DATOS -->
+            <div id="datos-registro" class="help-tab-pane active-pane">
+                <div class="sec-header">
+                    <span class="sec-number">01</span>
+                    <h2>Metadatos y Credenciales Oficiales</h2>
+                </div>
+                <p style="color: var(--text-dim); font-size: 13px;">Información asociada a tu cuenta activa dentro del ecosistema.</p>
+                
+                <table class="profile-meta-table">
+                    <tr><td class="meta-label">Nombre Completo</td><td class="meta-value" id="val-nombre">Cargando...</td></tr>
+                    <tr><td class="meta-label">Cédula / Documento</td><td class="meta-value" id="val-cedula">Cargando...</td></tr>
+                    <tr><td class="meta-label">Correo Principal</td><td class="meta-value" id="val-email">Cargando...</td></tr>
+                    <tr><td class="meta-label">Nivel de Inglés</td><td class="meta-value" id="val-nivel">Cargando...</td></tr>
+                    <tr><td class="meta-label">Estado de Cuenta</td><td class="meta-value" style="color: var(--success); font-weight: 700;">● Activo y Verificado</td></tr>
+                </table>
+
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión / Volver</button>
             </div>
+
+            <!-- 2. CURSOS Y MOODLE LMS -->
+            <div id="estado-academico" class="help-tab-pane">
+                <div class="sec-header">
+                    <span class="sec-number">02</span>
+                    <h2>Cursos Activos y Moodle LMS</h2>
+                </div>
+                <p style="color: var(--text-dim); font-size: 13px;">Accede de forma directa a tus plataformas de estudio configuradas:</p>
+                
+                <div style="display: grid; gap: 15px; margin-top: 20px;">
+                    <div style="background: #f8fafc; border: 1px solid var(--border); padding: 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="margin: 0 0 5px 0; color: var(--primary); font-size: 14px;">Moodle LMS (Nueva Versión cPanel)</h4>
+                            <p style="margin: 0; font-size: 12.5px; color: var(--text-dim);">Aulas virtuales, módulos de estudio y entrega de actividades.</p>
+                        </div>
+                        <a href="https://www.campuslatinoamerica.edu.co/moodle" target="_blank" class="btn-action-cla">Ingresar al Aula</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. COMPRAS Y SOPORTES -->
+            <div id="soportes-pago" class="help-tab-pane">
+                <div class="sec-header">
+                    <span class="sec-number">03</span>
+                    <h2>Historial de Pagos y Soportes</h2>
+                </div>
+                <p style="color: var(--text-dim); font-size: 13px;">Registro de tus transacciones y recibos validados en el sistema:</p>
+                <div style="background: #f9f9f9; padding: 20px; border-radius: 6px; border: 1px dashed var(--border); text-align: center; color: var(--text-dim); margin-top: 15px; font-size: 13px;">
+                    <strong>Soporte de matrícula verificado.</strong> Acceso total habilitado a simuladores y Moodle.
+                </div>
+            </div>
+
+            <!-- 4. SEGURIDAD Y ACCESOS -->
+            <div id="seguridad-cred" class="help-tab-pane">
+                <div class="sec-header">
+                    <span class="sec-number">04</span>
+                    <h2>Seguridad y Contraseña</h2>
+                </div>
+                <p style="color: var(--text-dim); font-size: 13px;">Modifica tus credenciales de acceso al ecosistema CLA:</p>
+                <div style="max-width: 400px; margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                    <input type="password" placeholder="Contraseña actual" style="padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px;">
+                    <input type="password" placeholder="Nueva contraseña" style="padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px;">
+                    <button class="btn-action-cla" style="width: fit-content;" onclick="alert('Contraseña actualizada con éxito')">Actualizar Clave</button>
+                </div>
+            </div>
+
         </div>
     </main>
 
-<script>
-// Cargar datos del estudiante en tiempo real desde el almacenamiento local
-window.onload = function() {
-    const sessionData = localStorage.getItem('campusla_student_session');
-    if (sessionData) {
-        const student = JSON.parse(sessionData);
-        document.getElementById('sidebarNombre').innerText = student.nombre || 'Estudiante';
-        document.getElementById('valNombre').innerText = student.nombre || 'N/A';
-        document.getElementById('valCedula').innerText = student.cedula || 'N/A';
-        document.getElementById('valCorreo').innerText = student.correo || 'N/A';
-        document.getElementById('valNivel').innerText = student.nivelIngles || 'N/A';
-        document.getElementById('valFecha').innerText = student.fechaRadicacion || new Date().toLocaleDateString();
-        if(student.estadoAdmision) { document.getElementById('valEstado').innerText = "● " + student.estadoAdmision; }
-    }
-};
+    <script>
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.help-tab-pane').forEach(pane => pane.classList.remove('active-pane'));
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active-pane');
+            btnElement.classList.add('active');
+        }
 
-// Control de pestañas de la barra lateral
-function cambiarVista(vistaId, elemento) {
-    document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    
-    document.getElementById('vista-' + vistaId).classList.add('active');
-    elemento.classList.add('active');
-}
-</script>
+        // Cargar dinámicamente los datos de la sesión del estudiante
+        window.onload = function() {
+            const sessionData = localStorage.getItem('campusla_student_session');
+            if (sessionData) {
+                const d = JSON.parse(sessionData);
+                if(d.nombre) {
+                    document.getElementById('sidebar-user-name').innerText = d.nombre;
+                    document.getElementById('val-nombre').innerText = d.nombre;
+                }
+                if(d.cedula) document.getElementById('val-cedula').innerText = d.cedula;
+                if(d.correo) document.getElementById('val-email').innerText = d.correo;
+                if(d.nivelIngles) document.getElementById('val-nivel').innerText = d.nivelIngles;
+            }
+        }
+
+        function cerrarSesion() {
+            if(confirm("¿Deseas cerrar sesión?")) {
+                localStorage.removeItem('campusla_student_session');
+                window.location.href = "index.html";
+            }
+        }
+    </script>
 </body>
 </html>
