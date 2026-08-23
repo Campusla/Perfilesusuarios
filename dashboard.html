@@ -3,96 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard del Estudiante | CampusLA</title>
+    <title>Consola del Estudiante | CampusLA</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #02060d; --card: #0b111d; --primary: #0084ff;
-            --secondary: #00f2ff; --text-main: #ffffff; --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08); --success: #00c853;
+            --bg: #f8fafc; --sidebar-bg: #ffffff; --card: #ffffff; --primary: #0084ff;
+            --text-main: #1e293b; --text-dim: #64748b; --border: #e2e8f0; --success: #059669;
         }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 20px; }
-        .wrapper { max-width: 800px; margin: auto; }
-        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; }
-        .badge-status { background: rgba(0, 200, 83, 0.1); color: var(--success); border: 1px solid var(--success); padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
         
-        .grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
-        .full-col { grid-column: span 2; }
-        h3 { font-size: 0.85rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        /* Barra Lateral */
+        aside { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .brand { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
+        .user-tag { font-size: 0.75rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; background: rgba(0, 132, 255, 0.08); padding: 4px 8px; border-radius: 4px; display: inline-block; }
         
-        .student-info p { margin: 8px 0; font-size: 0.9rem; color: var(--text-dim); }
-        .student-info strong { color: #fff; }
+        .nav-menu { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-item { padding: 12px 15px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-dim); cursor: pointer; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; }
+        .nav-item.active, .nav-item:hover { background: rgba(0, 132, 255, 0.1); color: var(--primary); }
+
+        /* Contenido Principal */
+        main { flex-grow: 1; padding: 40px; overflow-y: auto; box-sizing: border-box; }
+        h1 { font-size: 1.5rem; font-weight: 700; margin-top: 0; color: #0f172a; }
+        .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
+
+        .card-panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-header { font-size: 0.9rem; font-weight: 700; color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; }
         
-        .btn-action { display: block; background: var(--primary); color: #fff; text-align: center; padding: 14px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.85rem; margin-top: 15px; transition: 0.3s; }
-        .btn-action:hover { background: #0066cc; box-shadow: 0 0 15px rgba(0, 132, 255, 0.4); }
+        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+        .info-label { color: var(--text-dim); font-weight: 500; }
+        .info-val { font-weight: 600; color: #0f172a; }
+
+        .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.8rem; margin-top: 20px; transition: 0.2s; }
+        .btn-logout:hover { background: #fecaca; }
+
+        .section-view { display: none; }
+        .section-view.active { display: block; }
         
-        .course-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 12px 15px; border-radius: 10px; margin-bottom: 10px; }
-        .course-title { font-weight: 600; font-size: 0.9rem; }
-        .course-status { font-size: 0.75rem; color: var(--success); font-weight: 700; }
+        .btn-action { display: inline-block; background: var(--primary); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <header>
+    <!-- BARRA LATERAL -->
+    <aside>
         <div>
-            <div class="logo">CAMPUSLA</div>
-            <small style="color: var(--text-dim);">Escuela Andina Res 210 de 2020</small>
+            <div class="user-tag">Estudiante Pro</div>
+            <div class="brand" id="sidebarNombre">Cargando...</div>
         </div>
-        <div class="badge-status" id="lblEstado">Matrícula en Validación</div>
-    </header>
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="cambiarVista('perfil', this)">👤 1. Mi Perfil & Datos</li>
+            <li class="nav-item" onclick="cambiarVista('cursos', this)">📚 2. Cursos & Moodle LMS</li>
+            <li class="nav-item" onclick="cambiarVista('soporte', this)">💳 3. Pagos & Soportes</li>
+        </ul>
+        <button onclick="localStorage.removeItem('campusla_student_session'); window.location.href='index.html';" class="btn-logout">Cerrar Sesión</button>
+    </aside>
 
-    <div class="grid-dash">
-        <div class="card student-info">
-            <h3>👤 Perfil del Estudiante</h3>
-            <p>Nombre: <strong id="valNombre">Cargando...</strong></p>
-            <p>Cédula: <strong id="valCedula">Cargando...</strong></p>
-            <p>Correo: <strong id="valCorreo">Cargando...</strong></p>
-            <p>Nivel de Inglés: <strong id="valNivel">Cargando...</strong></p>
-            <p>Fecha de Radicación: <strong id="valFecha">Cargando...</strong></p>
-        </div>
-
-        <div class="card">
-            <h3>💳 Estado Financiero y Pagos</h3>
-            <p>Soporte de Pago: <strong style="color: var(--success);">Subido Correctamente</strong></p>
-            <p>Estado de Matrícula: <strong style="color: var(--secondary);">Verificado por Asesor</strong></p>
-            <div style="background: rgba(0, 132, 255, 0.05); border: 1px solid var(--primary); padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.8rem;">
-                Tu pago está siendo conciliado. Acceso habilitado a simuladores.
-            </div>
-        </div>
-
-        <div class="card full-col">
-            <h3>📚 Cursos, Exámenes y Simuladores Activos</h3>
+    <!-- CONTENIDO CENTRAL -->
+    <main>
+        <!-- VISTA 1: PERFIL -->
+        <div id="vista-perfil" class="section-view active">
+            <h1>Consola Personal del Estudiante</h1>
+            <p class="subtitle">Bienvenido a tu centro de control en CampusLA. Administra tu formación y accesos.</p>
             
-            <div class="course-item">
-                <div>
-                    <div class="course-title">Simulador Oficial TOEFL ITP + Moodle Core</div>
-                    <small style="color: var(--text-dim);">Acceso completo a exámenes de práctica y certificación</small>
-                </div>
-                <div class="course-status">ACTIVO 🚀</div>
+            <div class="card-panel">
+                <div class="card-header">01. Metadatos y Credenciales Oficiales</div>
+                <div class="info-row"><span class="info-label">Nombre Completo</span><span class="info-val" id="valNombre">Cargando...</span></div>
+                <div class="info-row"><span class="info-label">Cédula / Documento</span><span class="info-val" id="valCedula">Cargando...</span></div>
+                <div class="info-row"><span class="info-label">Correo Principal</span><span class="info-val" id="valCorreo">Cargando...</span></div>
+                <div class="info-row"><span class="info-label">Nivel de Inglés</span><span class="info-val" id="valNivel">Cargando...</span></div>
+                <div class="info-row"><span class="info-label">Estado de Cuenta</span><span class="info-val" style="color: var(--success);" id="valEstado">● Activo y Verificado</span></div>
             </div>
-
-            <!-- ENLACE APUNTANDO A TU CONSOLA PERSONALIZADA O MOODLE -->
-            <a href="perfilpersonal.html" class="btn-action">ACCEDER A MI CONSOLA Y CURSOS</a>
         </div>
-    </div>
-</div>
+
+        <!-- VISTA 2: CURSOS Y MOODLE -->
+        <div id="vista-cursos" class="section-view">
+            <h1>Mis Cursos y Moodle LMS</h1>
+            <p class="subtitle">Accede directamente a tus simuladores de examen y contenidos oficiales.</p>
+            
+            <div class="card-panel">
+                <div class="card-header">Simulador Oficial TOEFL ITP + Moodle Core</div>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Tienes habilitado el acceso completo a los módulos de práctica cronometrada y certificación internacional.</p>
+                <a href="https://www.campuslatinoamerica.edu.co/moodle/" target="_blank" class="btn-action">INGRESAR AL CAMPUS MOODLE</a>
+            </div>
+        </div>
+
+        <!-- VISTA 3: SOPORTES -->
+        <div id="vista-soporte" class="section-view">
+            <h1>Estado Financiero y Soportes</h1>
+            <p class="subtitle">Validación de pagos y radicación institucional.</p>
+            
+            <div class="card-panel">
+                <div class="card-header">Soporte de Matrícula</div>
+                <div class="info-row"><span class="info-label">Soporte de Pago</span><span class="info-val" style="color: var(--success);">Subido y Conciliado</span></div>
+                <div class="info-row"><span class="info-label">Fecha de Radicación</span><span class="info-val" id="valFecha">Cargando...</span></div>
+            </div>
+        </div>
+    </main>
 
 <script>
+// Cargar datos del estudiante en tiempo real desde el almacenamiento local
 window.onload = function() {
     const sessionData = localStorage.getItem('campusla_student_session');
     if (sessionData) {
         const student = JSON.parse(sessionData);
+        document.getElementById('sidebarNombre').innerText = student.nombre || 'Estudiante';
         document.getElementById('valNombre').innerText = student.nombre || 'N/A';
         document.getElementById('valCedula').innerText = student.cedula || 'N/A';
         document.getElementById('valCorreo').innerText = student.correo || 'N/A';
         document.getElementById('valNivel').innerText = student.nivelIngles || 'N/A';
         document.getElementById('valFecha').innerText = student.fechaRadicacion || new Date().toLocaleDateString();
-        if(student.estadoAdmision) { document.getElementById('lblEstado').innerText = student.estadoAdmision; }
+        if(student.estadoAdmision) { document.getElementById('valEstado').innerText = "● " + student.estadoAdmision; }
     }
 };
+
+// Control de pestañas de la barra lateral
+function cambiarVista(vistaId, elemento) {
+    document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    
+    document.getElementById('vista-' + vistaId).classList.add('active');
+    elemento.classList.add('active');
+}
 </script>
 </body>
 </html>
