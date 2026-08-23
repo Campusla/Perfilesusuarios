@@ -189,7 +189,9 @@
         function cerrarSesion() {
             if(confirm("¿Deseas cerrar sesión?")) {
                 localStorage.removeItem('campusla_student_session');
-                window.location.href = "index.html";
+                localStorage.removeItem('datos_campusla');
+                localStorage.removeItem('firma_campusla');
+                window.location.href = "https://www.campuslatinoamerica.edu.co";
             }
         }
     </script>
