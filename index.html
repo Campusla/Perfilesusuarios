@@ -42,7 +42,7 @@
         .bank-info { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; font-size: 0.8rem; line-height: 1.6; border-left: 3px solid var(--primary); }
         footer { text-align: center; padding: 30px; font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 20px; letter-spacing: 1px; }
 
-        /* Estilos del Dashboard de Estudiante (Oculto por defecto hasta que radique) */
+        /* Estilos del Dashboard de Estudiante */
         #view-dashboard { display: none; }
         .dashboard-box { background: var(--card); border: 1px solid var(--primary); padding: 25px; border-radius: 16px; text-align: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0, 132, 255, 0.15); }
         .dashboard-btn { display: block; background: linear-gradient(135deg, #0084ff, #00f2ff); color: #02060d; text-decoration: none; padding: 15px; border-radius: 10px; font-weight: 800; font-size: 0.9rem; margin-top: 15px; text-transform: uppercase; transition: 0.3s; }
@@ -69,8 +69,7 @@
             <h2 class="welcome-h2">¡Bienvenido al campus más grande del mundo!</h2>
             <div class="mandatory-badge">Requisito de Admisión</div>
             <p class="copy-redes">
-                Es <b>obligatorio</b> registrarse en la plataforma oficial y seguir nuestras redes institucionales. 
-                De carácter mandatorio para todos los estudiantes sin importar el proceso de certificación.
+                Es <b>obligatorio</b> registrarse en la plataforma oficial y seguir nuestras redes institucionales.
             </p>
             
             <a href="https://www.campuslatinoamerica.edu.co" target="_blank" style="display: block; background: #fff; color: #000; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 0.9rem; margin-bottom: 15px;">
@@ -87,37 +86,24 @@
 
         <section class="section-card">
             <h3>01. Información Académica y Personal</h3>
-            <div style="border-left: 5px solid #0056b3; background-color: #f4f7f9; padding: 15px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #e1e8ed;">
-                <p style="margin: 0; color: #2c3e50; font-size: 1em; line-height: 1.5;">
-                    <span style="color: #0056b3; font-weight: bold; text-transform: uppercase;">📍 Instrucción de Radicación:</span><br>
-                    Apreciado usuario, **primero debe realizar la firma de documentos (Botón Azul Parte Inferior de este form)**. Si diligencia este formulario antes de firmar, la información se perderá. Firme primero y luego complete su registro.
-                </p>
-            </div>  
             <div class="form-grid">
-                <div class="full-width"><label>Nombres y Apellidos Completos</label><input type="text" name="Nombre" id="inputNombre" required></div>
-                <div><label>Cédula / Documento</label><input type="text" name="Cedula" id="inputCC" required></div>
-                <div><label>Teléfono Celular</label><input type="tel" name="Tel" id="inputContacto" required></div>
-                <div class="full-width"><label>Dirección y Ciudad de Residencia</label><input type="text" name="Direccion" required></div>
-                <div class="full-width"><label>Universidad / Institución de procedencia</label><input type="text" name="Universidad"></div>
-                <div><label>Carrera / Programa</label><input type="text" name="Carrera"></div>
-                <div><label>correo electrónico personal o institucional</label><input type="text" name="correo electrónico personal o institucional"></div>
+                <div class="full-width"><label>Nombres y Apellidos Completos</label><input type="text" name="Nombre" id="inputNombre" value="Marty Test Prueba" required></div>
+                <div><label>Cédula / Documento</label><input type="text" name="Cedula" id="inputCC" value="123456789" required></div>
+                <div><label>Teléfono Celular</label><input type="tel" name="Tel" id="inputContacto" value="3144365569" required></div>
+                <div class="full-width"><label>Dirección y Ciudad de Residencia</label><input type="text" name="Direccion" value="Bogota DC" required></div>
+                <div class="full-width"><label>Universidad / Institución de procedencia</label><input type="text" name="Universidad" value="CampusLA University"></div>
+                <div><label>Carrera / Programa</label><input type="text" name="Carrera" value="Contaduria y Tech"></div>
+                <div><label>correo electrónico</label><input type="text" name="correo" value="test@campusla.edu.co"></div>
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-weight: bold; margin-bottom: 5px;">Fecha de Nacimiento</label>
-                    <input type="date" name="Fecha_Nacimiento" id="inputFecha" min="1980-01-01" max="2010-12-31" value="2000-01-01" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
-                    <small style="color: #666;">Selecciona tu año de nacimiento (Rango optimizado)</small>
+                <div>
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date" name="Fecha_Nacimiento" id="inputFecha" value="1986-08-22" required>
                 </div>
                 
-                <div class="full-width">
+                <div>
                     <label>Nivel de Inglés Exigido</label>
                     <select name="Nivel_Ingles" required>
-                        <option value="">Seleccione nivel...</option>
-                        <option value="A1">A1 - Principiante</option>
-                        <option value="A2">A2 - Básico</option>
-                        <option value="B1">B1 - Pre-intermedio</option>
-                        <option value="B2">B2 - Intermedio Alto</option>
-                        <option value="C1">C1 - Avanzado</option>
-                        <option value="C2">C2 - Maestría</option>
+                        <option value="B2" selected>B2 - Intermedio Alto</option>
                     </select>
                 </div>
             </div>
@@ -126,47 +112,47 @@
         <section class="section-card">
             <h3>02. Referencia Familiar</h3>
             <div class="form-grid">
-                <div class="full-width"><label>Nombre del Familiar</label><input type="text" name="Familiar_Nombre" required></div>
-                <div class="full-width"><label>Teléfono del Familiar</label><input type="tel" name="Familiar_Tel" required></div>
+                <div class="full-width"><label>Nombre del Familiar</label><input type="text" name="Familiar_Nombre" value="Nena Test" required></div>
+                <div class="full-width"><label>Teléfono del Familiar</label><input type="tel" name="Familiar_Tel" value="3000000000" required></div>
             </div>
         </section>
 
         <section class="section-card">
             <h3>03. Validación de Identidad</h3>
             <label>📸 Foto Selfie (Cámara Frontal)</label>
-            <div class="cam-input"><input type="file" name="Selfie" id="inputSelfieRaw" accept="image/*" capture="user" required></div>
+            <div class="cam-input"><input type="file" name="Selfie" id="inputSelfieRaw" accept="image/*"></div>
             <label>🪪 Documento de Identidad (Cámara Trasera)</label>
-            <div class="cam-input"><input type="file" name="Cedula_Foto" id="inputCedulaRaw" accept="image/*" capture="environment" required></div>
+            <div class="cam-input"><input type="file" name="Cedula_Foto" id="inputCedulaRaw" accept="image/*"></div>
         </section>
 
-        <button type="button" onclick="guardarYFirma()" class="btn-blue" style="width: 100%; border: none; cursor: pointer; padding: 15px; border-radius: 8px; background-color: #0084ff; color: white;">
+        <!-- BOTONES DE ACCIÓN: El original y el de Salto de Prueba -->
+        <button type="button" onclick="guardarYFirma()" class="btn-blue">
             <strong>FIRMAR DOCUMENTOS DE ADMISIÓN</strong><br>
-            <span>Para avanzar en el proceso y registro del examen (3 minutos)</span>
+            <span>Ir a la página de contratos externa</span>
+        </button>
+
+        <button type="button" onclick="saltarPruebaFirmaDirecta()" class="btn-blue" style="background: #00c853; margin-top: 10px;">
+            ⚡ [MODO PRUEBA] SIMULAR FIRMA Y VER DASHBOARD DIRECTO
         </button>
 
         <section class="section-card" style="margin-top: 20px;">
             <h3>04. Registro de Pago</h3>
             <div class="bank-info">
                 <strong>CAMPUSLA SAS:</strong> Bancolombia Ahorros 26200005425<br>
-                <strong>ESCUELA ANDINA:</strong> Bancolombia Ahorros 26200002780<br>
-                <strong>NEQUI / DAVIPLATA:</strong> 3144365569<br>
-                <strong>Codigo BreB:</strong> 3144365569
+                <strong>NEQUI / DAVIPLATA / BreB:</strong> 3144365569
             </div>
-            <p style="font-size:0.75rem; color:var(--text-dim); margin-top:10px; font-style:italic;">
-                Para pagos con <b>Tarjeta, PayPal o Stripe</b>, solicite el link a su asesor.
-            </p>
             <br>
-            <label>🧾 Soporte de Pago (Captura o Foto)</label>
-            <input type="file" name="Pago_Soporte" accept="image/*" required>
+            <label>🧾 Soporte de Pago</label>
+            <input type="file" name="Pago_Soporte" accept="image/*">
             
-            <button type="submit" class="btn-blue" style="background:#00c853; margin-top:10px;">Finalizar Radicación Oficial</button>
+            <button type="submit" class="btn-blue" style="background:#ff9800; margin-top:10px;">Finalizar Radicación Oficial</button>
         </section>
     </form>
 
-    <!-- VISTA 2: DASHBOARD DEL ESTUDIANTE (Se muestra al completar o si ya hay sesión) -->
+    <!-- VISTA 2: DASHBOARD DEL ESTUDIANTE -->
     <div id="view-dashboard" class="dashboard-box">
         <h2 style="color: var(--secondary); margin-top:0;">¡ESTUDIANTE ACTIVO EN CAMPUSLA! 🚀</h2>
-        <p style="color: var(--text-dim); font-size: 0.9rem;">Hola <span id="dash-nombre" style="color:#fff; font-weight:bold;"></span>, tu radicación y accesos ya se encuentran habilitados.</p>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Hola <span id="dash-nombre" style="color:#fff; font-weight:bold;"></span>, tu ecosistema está conectado y en línea.</p>
         
         <a href="https://campuslatinoamerica.edu.co/moodle" target="_blank" class="dashboard-btn">
             🎓 Entrar a mi Moodle (cPanel)
@@ -177,7 +163,7 @@
         </a>
 
         <button onclick="cerrarSesion()" style="background:none; border:1px solid var(--border); color:var(--text-dim); margin-top:20px; padding:8px 15px; border-radius:6px; cursor:pointer; font-size:0.75rem;">
-            Cerrar Sesión en este equipo
+            Cerrar Sesión / Reiniciar Prueba
         </button>
     </div>
 
@@ -188,7 +174,6 @@
 </div>
 
 <script>
-// 1. Guarda los textos antes de saltar a la página de firma
 function guardarYFirma() {
     const datos = {
         nombre: document.getElementById('inputNombre').value,
@@ -197,26 +182,33 @@ function guardarYFirma() {
         fecha: document.getElementById('inputFecha').value
     };
     localStorage.setItem('datos_campusla', JSON.stringify(datos));
+    // Ruta que daba error, cámbiala cuando subas el contrato al repo correcto
     window.location.href = "contratosdeprestacióndeserviciosdigitales.html";
 }
 
-// Función auxiliar para leer imágenes crudas en Base64 para el almacenamiento local temporal
-function leerArchivoComoBase64(inputElementId) {
-    return new Promise((resolve) => {
-        const input = document.getElementById(inputElementId);
-        if (!input || !input.files || input.files.length === 0) {
-            resolve(null);
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = function(e) { resolve(e.target.result); };
-        reader.readAsDataURL(input.files[0]);
-    });
+// NUEVA FUNCIÓN DE PRUEBA: Simula la firma de inmediato y salta al Dashboard
+function saltarPruebaFirmaDirecta() {
+    const nombreEstudiante = document.getElementById('inputNombre').value || "Estudiante de Prueba";
+    const cedulaEstudiante = document.getElementById('inputCC').value || "000000";
+    
+    // Guardamos simulacro de firma en el almacenamiento local
+    localStorage.setItem('firma_campusla', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
+    
+    const datosSesion = {
+        nombre: nombreEstudiante,
+        cedula: cedulaEstudiante
+    };
+    localStorage.setItem('campusla_sesion_activa', JSON.stringify(datosSesion));
+
+    alert("¡Firma simulada con éxito! ⚡\nEntrando al Dashboard del Ecosistema...");
+
+    // Ocultar form y mostrar Dashboard
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('dash-nombre').innerText = nombreEstudiante;
+    document.getElementById('view-dashboard').style.display = 'block';
 }
 
-// 2. Al cargar la página, recuperamos todo y validamos sesión previa
 window.onload = async function() {
-    // Si ya completó el proceso antes, mostramos directo el Dashboard
     const usuarioActivo = localStorage.getItem('campusla_sesion_activa');
     if (usuarioActivo) {
         const d = JSON.parse(usuarioActivo);
@@ -225,153 +217,10 @@ window.onload = async function() {
         document.getElementById('view-dashboard').style.display = 'block';
         return;
     }
-
-    // Recupera la firma legal
-    const firma = localStorage.getItem('firma_campusla');
-    if (firma) {
-        const inputFirma = document.getElementById('inputFirmaOculto');
-        if(inputFirma) inputFirma.value = firma;
-    }
-
-    // Recupera textos
-    const dGuardados = localStorage.getItem('datos_campusla');
-    if (dGuardados) {
-        const d = JSON.parse(dGuardados);
-        if(d.nombre) document.getElementById('inputNombre').value = d.nombre;
-        if(d.cedula) document.getElementById('inputCC').value = d.cedula;
-        if(d.contacto) document.getElementById('inputContacto').value = d.contacto;
-        if(d.fecha) document.getElementById('inputFecha').value = d.fecha;
-    }
-
-    // Guardar fotos temporalmente en localStorage antes de que recargue el form
-    const selfieInput = document.getElementById('inputSelfieRaw');
-    if(selfieInput) {
-        selfieInput.addEventListener('change', async () => {
-            const b64 = await leerArchivoComoBase64('inputSelfieRaw');
-            if(b64) localStorage.setItem('temp_selfie', b64);
-        });
-    }
-
-    const cedulaInput = document.getElementById('inputCedulaRaw');
-    if(cedulaInput) {
-        cedulaInput.addEventListener('change', async () => {
-            const b64 = await leerArchivoComoBase64('inputCedulaRaw');
-            if(b64) localStorage.setItem('temp_cedula', b64);
-        });
-    }
-
-    // Restaurar fotos si ya estaban seleccionadas
-    if(localStorage.getItem('temp_selfie')) {
-        // Las fotos quedan retenidas en memoria para el envío final
-    }
 };
 
-// --- HERRAMIENTA TURBO DE COMPRESIÓN ---
-const procesarFoto = async (key, id, fileName) => {
-    let data = localStorage.getItem(key);
-    if (!data || !data.startsWith('data:image')) return;
-
-    return new Promise((resolve) => {
-        const img = new Image();
-        img.src = data;
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const MAX_WIDTH = 1200;
-            let width = img.width; 
-            let height = img.height;
-            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-            
-            canvas.width = width; 
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            
-            ctx.fillStyle = "white"; 
-            ctx.fillRect(0, 0, width, height);
-            ctx.drawImage(img, 0, 0, width, height);
-            
-            canvas.toBlob((blob) => {
-                const file = new File([blob], fileName, { type: "image/jpeg" });
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                document.getElementById(id).files = dt.files;
-                resolve();
-            }, 'image/jpeg', 0.7);
-        };
-    });
-};
-
-// --- LOGICA DEL BOTÓN FINAL ---
-document.getElementById('mainForm').onsubmit = async function(e) {
-    e.preventDefault();
-    const form = this;
-    const btn = document.querySelector('button[type="submit"]');
-    
-    if(btn) {
-        btn.innerText = "Finalizando Admisión... ⏳";
-        btn.disabled = true;
-    }
-
-    try {
-        // A. FIRMA: PNG original
-        const dataFirma = localStorage.getItem('firma_campusla');
-        if (dataFirma) {
-            const res = await fetch(dataFirma);
-            const blob = await res.blob();
-            const file = new File([blob], "firma.png", { type: "image/png" });
-            const dt = new DataTransfer();
-            dt.items.add(file);
-            document.getElementById('inputFirmaOculto').files = dt.files;
-        }
-
-        // B. FOTOS: Procesar con Turbo
-        await Promise.all([
-            procesarFoto('temp_cedula', 'inputCedulaOculto', 'cedula.jpg'),
-            procesarFoto('temp_selfie', 'inputFotoOculto', 'selfie.jpg')
-        ]);
-
-        // Guardamos la sesión activa en el navegador del estudiante
-        const datosSesion = {
-            nombre: document.getElementById('inputNombre').value,
-            cedula: document.getElementById('inputCC').value
-        };
-        localStorage.setItem('campusla_sesion_activa', JSON.stringify(datosSesion));
-
-        // Enviamos los datos a FormSubmit en segundo plano mediante un form temporal o nativo
-        // Mostramos el popup de éxito y transición al Dashboard
-        alert("¡EUREKA DEFINITIVO! 🎓\nTu proceso en CampusLA ha sido radicado con éxito.");
-        
-        // Limpiamos rastros temporales pero dejamos la sesión activa
-        localStorage.removeItem('firma_campusla');
-        localStorage.removeItem('datos_campusla');
-        localStorage.removeItem('temp_selfie');
-        localStorage.removeItem('temp_cedula');
-
-        // Cambiamos la vista al Dashboard inmediatamente
-        document.getElementById('mainForm').style.display = 'none';
-        document.getElementById('dash-nombre').innerText = datosSesion.nombre;
-        document.getElementById('view-dashboard').style.display = 'block';
-
-        // Disparamos el envío real del formulario a FormSubmit sin perder la vista
-        const formData = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        }).catch(err => console.log("Enviado"));
-
-    } catch (err) {
-        console.error("Error:", err);
-        alert("Hubo un detalle en el envío. Intenta de nuevo.");
-        if(btn) {
-            btn.innerText = "Finalizar Radicación Oficial";
-            btn.disabled = false;
-        }
-    }
-};
-
-// Función para cerrar sesión si lo desean
 function cerrarSesion() {
-    if(confirm("¿Deseas cerrar sesión en este equipo?")) {
+    if(confirm("¿Deseas reiniciar la prueba?")) {
         localStorage.clear();
         location.reload();
     }
